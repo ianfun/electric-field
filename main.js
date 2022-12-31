@@ -120,9 +120,8 @@ document.getElementById("add").addEventListener("click", function() {
 }, false);
 document.getElementById('export').addEventListener('click', function(e){
   var dummy = document.createElement('div');
-  dummy.appendChild(svg);
   var a = document.createElement('a');
-  a.setAttribute('href', 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(dummy.innerHTML));
+  a.setAttribute('href', 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">' + svg.innerHTML + '</svg>'));
   a.setAttribute('download', 'electricity_field.svg');
   a.click();
 }, false);
