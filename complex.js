@@ -1,3 +1,8 @@
+/**
+ * complex.js - implements complex numbers
+ * https://github.com/ianfun/electric-field
+ * Copyright, 2022, ianfun.
+ */
 function polar_complex(r = 0, theta = 0) {
     console.assert(this != window);
     this.r = r;

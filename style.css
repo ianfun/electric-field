@@ -1,9 +1,14 @@
+/**
+ * https://github.com/ianfun/electric-field
+ * Copyright, 2022, ianfun.
+ */
 input.myRange {
     width: 300pt;
 }
 td, th {
     width: 100px;
     border: solid 1px;
+    text-align: center;
 }
 table {
     border-collapse: collapse;

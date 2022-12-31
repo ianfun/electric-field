@@ -1,27 +1,27 @@
+<!-- Fork me on Github: https://github.com/ianfun/electric-field -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HTML</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Electric field - Coulomb's law</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">.
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <a style="position: absolute; top: 20px; left: 400px" href="https://github.com/ianfun/electric-field"><img decoding="async" loading="lazy" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
   <svg style="position: absolute; top: 20px;left: 20px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="500" height="500">
     <circle cx="-1" cy="-1" r="1"/>
     <g id="coord"></g>>
   </svg>
   <table style="position: absolute;top: 20px; left: 530px;">
     <thead>
-      <th>名稱</th>
+      <th>Name</th>
       <th>x</th>
       <th>y</th>
-      <th>電量</th>
+      <th>Electricity(Q)(Coulomb)</th>
     </thead>
-    <tbody>
-
-    </tbody>
+    <tbody></tbody>
   </table>
   <div style="position: absolute;top: 530px; left: 20px;">
     <label for="x">x</label>
@@ -32,9 +32,34 @@
     <input type="range" id="y" min="0" max="10" step="0.1" class="myRange" value="0">
     <input type="number" id="y_val" min="0" max="10" value="0"> 
     <br>
-    <label for="q">電量</label>
+    <label for="q">Q</label>
     <input type="range" id="q" min="0" max="100" step="0.1" class="myRange" value="1">
     <input type="number" id="q_val" min="0" max="10" value="1"> 
+    <br>
+    <a style="font-size: large;" href="https://en.wikipedia.org/wiki/Coulomb%27s_law">Coulomb's law</a>
+    <math display="block">
+      <mrow>
+        <mi>F</mi>
+        <mo>=</mo>
+        <mi>K</mi>
+        <mfrac>
+          <mrow>
+            <msub>
+              <mi>q</mi>
+              <mn>1</mn>
+            </msub>
+            <msub>
+              <mi>q</mi>
+              <mn>2</mn>
+            </msub>
+          </mrow>
+          <msup>
+            <mi>r</mi>
+            <mn>2</mn>
+          </msup>
+        </mfrac>
+      </mrow>
+    </math>
   </div>
   <script src="complex.js"></script>
   <script src="main.js"></script>
