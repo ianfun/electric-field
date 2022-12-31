@@ -13,3 +13,7 @@ td, th {
 table {
     border-collapse: collapse;
 }
+tr.editing {
+    background-color: bisque;
+    border: 3px ridge darkorchid;
+}

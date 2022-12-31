@@ -19,14 +19,18 @@
       <th>Name</th>
       <th>x</th>
       <th>y</th>
-      <th>Electricity(Q)(Coulomb)</th>
+      <th>Electricity(Q)</th>
       <th>Edit</th>
       <th>Delete</th>
     </thead>
     <tbody></tbody>
   </table>
-  <button style="position: absolute; top: 530px;left: 620px;width: 100px;">Add</button>
-  <div style="position: absolute;top: 530px; left: 20px;" id="edit">
+  <div style="position: absolute; top: 525px;left: 620px;width: 100px;" >
+    <button id="add">Add</button>
+    <button id="export">Download as SVG</button>
+    <button id="open">Open in new window</button>
+  </div>
+  <div style="position: absolute;top: 525px; left: 20px;" id="edit">
     <label for="x">x</label>
     <input type="range" id="x" min="0" max="10" step="0.1" class="myRange" value="0">
     <input type="number" id="x_val" min="0" max="10" value="0">
@@ -39,30 +43,16 @@
     <input type="range" id="q" min="0" max="100" step="0.1" class="myRange" value="1">
     <input type="number" id="q_val" min="0" max="10" value="1"> 
     <br>
-    <a style="font-size: large;" href="https://en.wikipedia.org/wiki/Coulomb%27s_law">Coulomb's law</a>
-    <math display="block">
-      <mrow>
-        <mi>F</mi>
-        <mo>=</mo>
-        <mi>K</mi>
-        <mfrac>
-          <mrow>
-            <msub>
-              <mi>q</mi>
-              <mn>1</mn>
-            </msub>
-            <msub>
-              <mi>q</mi>
-              <mn>2</mn>
-            </msub>
-          </mrow>
-          <msup>
-            <mi>r</mi>
-            <mn>2</mn>
-          </msup>
-        </mfrac>
-      </mrow>
-    </math>
+  </div>
+  <div style="position: absolute; top: 400px;left: 750px;" >
+    <input type="number" id="K" value="1">
+    <label for="K">Coulomb constant</label>
+    <br>
+    <p>electric field in vacuum</p>
+    <a href="https://en.wikipedia.org/wiki/Coulomb%27s_law">
+      Coulomb's law
+      <img src="math.png" width="150" height="55">
+    </a>
   </div>
   <script src="complex.js"></script>
   <script src="main.js"></script>

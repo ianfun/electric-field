@@ -15,9 +15,10 @@ var circle = svg.firstElementChild;
 var coord_nodes;
 var coord = svg.querySelector("g");
 var tbody = document.querySelector("tbody");
-var qcount = 0;
+var qcount = 1;
 var cur_edit_target = null;
 var div = document.getElementById("edit");
+var K = document.getElementById("K");
 const x_max = 10;
 const y_max = 10;
 const block_size = 10;
@@ -52,28 +53,28 @@ function run() {
     }
     return;
   }
-  const x3 = Number(circle.getAttribute("cx")) / 10;
-  const y3 = Number(circle.getAttribute("cy")) / 10;
-  const Q3 = Number(q3.value);
   var count = 0;
   var vec = new cartesian_complex();
+  const Q1 = 1;
+  const K_F = parseFloat(K.value);
   for (var x1=0;x1 < x_max;x1++) {
     for (var y1 = 0;y1<y_max;y1++) {
       const mynode = coord_nodes[count++];
       for (var node of tbody.childNodes) {
         if (!node.hasChildNodes())
           continue;
-        const Q1 = Number(node.childNodes[3].innerText);
-        const x_diff = x3 - x1;
-        const y_diff = y3 - y1;
+        const x2 = parseFloat(node.childNodes[1].innerText);
+        const y2 = parseFloat(node.childNodes[2].innerText);
+        const Q2 = parseFloat(node.childNodes[3].innerText);
+        const x_diff = x2 - x1;
+        const y_diff = y2 - y1;
         if (x_diff == 0 || y_diff == 0) {
           mynode.style.visibility = 'hidden';
           continue;
         }
         mynode.style.visibility = 'visible';
         const r = Math.hypot(x_diff, y_diff);
-        /* Actually K is 9e+9, we use 1 for scalability and display reasons */;
-        const F = (Q1 * Q3) / (r * r);
+        const F = K_F * (Q1 * Q2) / (r * r);
         const theta = Math.atan2(x_diff, y_diff);
         vec.add2(new polar_complex(F, theta));
         if (vec.x > 5)
@@ -86,13 +87,19 @@ function run() {
         mynode.setAttribute("y1", tmp2 - vec.y);
         mynode.setAttribute("x2", tmp1 + vec.x);
         mynode.setAttribute("y2", tmp2 + vec.y);
-        vec.reset();
       }
+      vec.reset();
     }
   }
 }
+function reset_edit_target(node) {
+  if (cur_edit_target) {
+    cur_edit_target.classList.remove("editing");
+  }
+  cur_edit_target = node;
+  cur_edit_target.classList.add("editing");
+}
 function onClickDelete(e) {
-  //             button          td         tr
   const target = e.currentTarget.parentNode.parentNode;
   if (Object.is(target, cur_edit_target)) {
     div.style.visibility = 'hidden';
@@ -102,13 +109,26 @@ function onClickDelete(e) {
   run();
 }
 function onClickEdit(e) {
-  //                button          td         tr
-  cur_edit_target = e.currentTarget.parentNode.parentNode;
+  reset_edit_target(e.currentTarget.parentNode.parentNode);
   x3.value = x3_val.value = cur_edit_target.childNodes[1].innerText;
-  y3.value = y3_val.value = cur_edit_target.childNodes[3].innerText;
+  y3.value = y3_val.value = cur_edit_target.childNodes[2].innerText;
+  circle.setAttribute("cx", 10 * x3.value);
+  circle.setAttribute("cy", 10 * y3.value);
 }
-document.querySelector("button").addEventListener("click", function() {
+document.getElementById("add").addEventListener("click", function() {
   addQ('Q' + (++qcount).toString(), 1, 1);
+}, false);
+document.getElementById('export').addEventListener('click', function(e){
+  var dummy = document.createElement('div');
+  dummy.appendChild(svg);
+  var a = document.createElement('a');
+  a.setAttribute('href', 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(dummy.innerHTML));
+  a.setAttribute('download', 'electricity_field.svg');
+  a.click();
+}, false);
+document.getElementById('open').addEventListener('click', function(){
+  var w = window.open('', 'View SVG', 'popup');
+  w.document.body.appendChild(svg.cloneNode(true));
 }, false);
 x3.addEventListener("input", () => setX(x3));
 y3.addEventListener("input", () => setY(y3));
@@ -117,11 +137,6 @@ x3_val.addEventListener("input", () => setX(x3_val));
 y3_val.addEventListener("input", () => setY(y3_val));
 q3_val.addEventListener("input", () => setQ(q3_val));
 function addQ(name, x, y, q = 1) {
-  for (var node of tbody.childNodes) {
-    if (node.firstElementChild && name == node.firstElementChild.innerText) {
-      return addQ(name + '(1)', x, y, q);
-    }
-  }
   var elem_name = document.createElement("td");
   var elem_q = document.createElement("td");
   var elem_x = document.createElement("td");
@@ -150,7 +165,7 @@ function addQ(name, x, y, q = 1) {
   tr.appendChild(elem_edit);
   tr.appendChild(elem_btn);
   tbody.appendChild(tr);
-  cur_edit_target = tr;
+  reset_edit_target(tr);
   div.style.visibility = 'visible';
   run();
 }
@@ -182,3 +197,4 @@ for (var x=0;x < x_max;x++) {
 }
 coord_nodes = coord.childNodes;
 addQ("Q1", 5, 5, 1);
+K.addEventListener('click', run, false);
