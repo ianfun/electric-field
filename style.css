@@ -1,0 +1,10 @@
+input.myRange {
+    width: 300pt;
+}
+td, th {
+    width: 100px;
+    border: solid 1px;
+}
+table {
+    border-collapse: collapse;
+}

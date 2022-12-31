@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <svg style="position: absolute; top: 20px;left: 20px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+    <circle cx="-1" cy="-1" r="1"/>
+    <g id="coord"></g>>
+  </svg>
+  <table style="position: absolute;top: 20px; left: 530px;">
+    <thead>
+      <th>名稱</th>
+      <th>x</th>
+      <th>y</th>
+      <th>電量</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+  <div style="position: absolute;top: 530px; left: 20px;">
+    <label for="x">x</label>
+    <input type="range" id="x" min="0" max="10" step="0.1" class="myRange" value="0">
+    <input type="number" id="x_val" min="0" max="10" value="0">
+    <br>
+    <label for="y">y</label>
+    <input type="range" id="y" min="0" max="10" step="0.1" class="myRange" value="0">
+    <input type="number" id="y_val" min="0" max="10" value="0"> 
+    <br>
+    <label for="q">電量</label>
+    <input type="range" id="q" min="0" max="100" step="0.1" class="myRange" value="1">
+    <input type="number" id="q_val" min="0" max="10" value="1"> 
+  </div>
+  <script src="complex.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
